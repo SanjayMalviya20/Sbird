@@ -5,7 +5,6 @@ const Commentbox = () => {
   console.log(comment)
   const handleSubmit = (e) => {
     e.preventDefault()
-
     console.log(comment)
   }
   return (

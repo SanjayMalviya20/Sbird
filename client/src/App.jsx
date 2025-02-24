@@ -7,6 +7,8 @@ import Feed from "./components/Feed"
 import Profile from "./components/Profile"
 // import { ToastContainer } from "react-toastify"
 import  { Toaster } from 'react-hot-toast';
+import Bookmarkpost from "./components/Bookmarkpost"
+import Premium from "./components/Premium"
 // import {} from "react-icons"
 function App() {
 
@@ -21,7 +23,8 @@ function App() {
       element: <Home />,
 
       children: 
-      [{
+      [
+        {
       path: "/",
       element: <Feed />
      
@@ -29,7 +32,16 @@ function App() {
       {
         path: "/profile/:id",
         element: <Profile />
-      }
+      },
+      {
+        path: "/bookmarkpost/:id",
+        element:<Bookmarkpost/>
+      },
+
+     {
+       path:"/premium",
+       element:<Premium/>
+     }
       ]
 
     }

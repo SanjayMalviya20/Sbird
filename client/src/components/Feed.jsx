@@ -27,7 +27,7 @@ const Feed = () => {
   const datapost = async() => {
     // dispatch(setlodaing({ loading: true }))
     const data = await axios.get(`http://localhost:8000/post/allpost/${user?._id}`)
-    dispatch(setallpost({ data: data.data}))
+    dispatch(setallpost({ data: data?.data}))
     // dispatch(setlodaing({ loading: false }))
   }
  
@@ -58,7 +58,7 @@ datapost()
       setText("")
       setfile({url:null})
     } catch (error) {
-      toast.error(error.response.data.message)
+      toast.error(error?.response?.data?.message)
       
     }
 
@@ -72,7 +72,7 @@ datapost()
       toast.success("post deleted",{onClose:true})
       datapost()
     } catch (error) {
-      toast.error(error.response.data.message)
+      toast.error(error?.response?.data?.message)
     }
   }
 
@@ -88,7 +88,7 @@ datapost()
     }
       datapost()
     } catch (error) {
-      toast.error(error.response.data.message)
+      toast.error(error?.response?.data?.message)
     }
   }
 

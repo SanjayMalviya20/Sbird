@@ -1,6 +1,6 @@
 import React from 'react'
-import { FaBell, FaHome, FaPowerOff, FaRegBell, FaRegBookmark } from "react-icons/fa"
-import { CgBookmark, CgHome, CgMore, CgMoreO, CgMoreR, CgNotifications, CgProfile } from "react-icons/cg";
+import { FaBell, FaHome, FaRegBookmark } from "react-icons/fa"
+import { CgMoreO, CgProfile } from "react-icons/cg";
 import { SiThunderbird } from "react-icons/si";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -21,6 +21,10 @@ const handlelogout = async() => {
   navigate("/Auth")
   console.log("dd")
 
+  }
+
+  const handlebookmark = async() => {
+    navigate(`/bookmarkpost/${user?._id}`)
   }
   return (
     <>
@@ -44,15 +48,15 @@ const handlelogout = async() => {
         </li>
         <li>
           <a style={{ fontSize: "15px" }} >
-            <FaRegBookmark size={20} />
+            <FaRegBookmark onClick={handlebookmark} size={20} />
             bookmarks
           </a>
         </li>
         <li>
-          <a style={{ fontSize: "15px" }} >
+          <Link to={"/premium"} style={{ fontSize: "15px" }} >
             <SiThunderbird size={20} />
             premium
-          </a>
+          </Link>
         </li>
         <li>
           <a style={{ fontSize: "15px" }} >

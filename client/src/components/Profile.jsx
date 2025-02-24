@@ -1,13 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
-import Avatar from 'react-avatar';
 import { FaArrowLeft } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { setProfile, setfollow, setrefresh, setupdate } from '../actions/action';
 import webcover from "./image.png"
 import webprofile from "./profile.jpg"
-import { CgImage, CgProfile } from 'react-icons/cg';
+import { CgImage } from 'react-icons/cg';
 import Skeleton from './skeleton';
 const Profile = () => {
   const click = useRef()
@@ -15,9 +14,9 @@ const Profile = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const profile = useSelector((state) => state.user.profile.user)
-  const refresh = useSelector((state) => state.user.refresh)
-  //console.log(refresh)
-  const postid = useSelector((state) => state.user.postid)
+  const refresh = useSelector((state) => state.user?.refresh)
+  console.log(refresh)
+  // const postid = useSelector((state) => state.user.postid)
   const post = useSelector((state) => state.posts.getallpost)
   const user = useSelector((state) => state.user.user)
   const [name, setname] = useState("");
@@ -44,8 +43,6 @@ const Profile = () => {
   }
   const updateprofile = async (e) => {
     e.preventDefault()
-
-
     const formdata = new FormData()
     formdata.append("name", name)
     formdata.append("image", profilepic)
@@ -68,7 +65,7 @@ const Profile = () => {
   return (
     <>
       {
-        [profile].map((data) => {
+        [profile].map((data,index) => {
           return (
             <>
               <div >
@@ -106,7 +103,9 @@ const Profile = () => {
                 </div>
               </div>
 
-              {refresh ? <div style={{ flex: "6", padding: "10px", display: "flex", flexDirection: "column", gap: "10px" }}><Skeleton /></div> : <div key={data?._id} style={{ flex: "6", padding: "10px", display: "flex", flexDirection: "column", gap: "10px" }}>
+              {refresh===true? 
+              <div  key={index} style={{ flex: "6", padding: "10px", display: "flex", flexDirection: "column", gap: "10px" }}><Skeleton />
+              </div> : <div key={data?._id} style={{ flex: "6", padding: "10px", display: "flex", flexDirection: "column", gap: "10px" }}>
                 <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
                   <Link to={"/"}><FaArrowLeft size={20} /></Link>
                   <span style={{ fontSize: "18px", color: "skyblue" }}>{data?.name}</span>

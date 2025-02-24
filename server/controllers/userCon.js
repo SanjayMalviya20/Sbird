@@ -181,6 +181,29 @@ export const follow=async(req,res)=>{
   }
 }
 
+export const getBookmarkspost = async (req, res) => {
+  try {
+    const { userid } = req.params; // Get the user ID from the request parameters
+
+    if (!userid) {
+      return res.status(400).json({ message: 'Invalid request data' });
+    }
+    
+
+    const user = await User.findById(userid); // Find the user by ID
+    if (!user) {
+      return res.status(404).json({ message: 'User  not found' });
+    }
+
+    // Find all posts that are bookmarked by the user
+    const bookmarkedPosts = await Post.find({ _id: { $in: user.bookmarks } });
+
+    return res.status(200).json({ message: 'Bookmarked posts retrieved successfully', bookmarkedPosts });
+  } catch (error) {
+    console.error(error); // Log the error for debugging
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
 
 
 

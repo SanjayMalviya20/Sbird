@@ -43,6 +43,7 @@ const user=  useSelector((state)=>state.user)
     
         if(newData.data){
           toast.success("Welcome buddy")
+          console.log(newData.data)
           setAuth(false)
         }
 
